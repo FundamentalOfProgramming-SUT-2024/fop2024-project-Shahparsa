@@ -3906,6 +3906,87 @@ int loadkon(Profile *pl){
     }
 }
 
+void sari(Profile *pl , int meow , char bazi[LINES][COLS]){
+    int x = pl->pos.x;
+    int y = pl->pos.y;
+    if(meow == 0){//U
+        for(int i = 1 ; i < 50 ; i++){
+            y--;
+             if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                y++;
+                i = 51;
+            }
+        }
+    }else if(meow == 1){//D
+        for(int i = 1 ; i < 50 ; i++){
+            y++;
+            if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                y--;
+                i = 51;
+            }
+        }
+    }else if(meow == 2){//L
+        for(int i = 1 ; i < 50 ; i++){
+            x--;
+            if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                x++;
+                i = 51;
+            }
+        }
+    }else if(meow == 3){//R
+        for(int i = 1 ; i < 50 ; i++){
+            x++;
+            if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                x--;
+                i = 51;
+            }
+        }
+    }else if(meow == 4){//UL
+        for(int i = 1 ; i < 50 ; i++){
+            x--;
+            y--;
+            if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                x++;
+                y++;
+                i = 51;
+            }
+        }
+    }else if(meow == 5){//UR
+        for(int i = 1 ; i < 50 ; i++){
+            x++;
+            y--;
+            if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                x--;
+                y++;
+                i = 51;
+            }
+        }
+    }else if(meow == 6){//DR
+        for(int i = 1 ; i < 50 ; i++){
+            x++;
+            y++;
+            if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                x--;
+                y--;
+                i = 51;
+            }
+        }
+    }else if(meow == 7){//DL
+        for(int i = 1 ; i < 50 ; i++){
+            x--;
+            y++;
+            if(bazi[y][x] != '.' || bazi[y][x] != '#' || bazi[y][x] != '+' || bazi[y][x] == '?'){
+                x++;
+                y--;
+                i = 51;
+            }
+        }
+    }
+    pl->pos.x = x;
+    pl->pos.y = y;
+    mvprintw(y , x , "@");
+}
+
 int play_tabaghe1(int otagh , int list[otagh][5] , char floor[LINES][COLS] , int didan[LINES][COLS] , Profile *pl , int value[LINES][COLS] , int ghaza[LINES][COLS] , int joon[LINES][COLS] , int donbal[LINES][COLS] , int oftadeh[LINES][COLS]){
     int ch;
     init_pair(1 , COLOR_RED , COLOR_BLACK);
@@ -4070,6 +4151,29 @@ int play_tabaghe1(int otagh , int list[otagh][5] , char floor[LINES][COLS] , int
             }else if(pl->Dast == -1){//No Weapon
                 
             }
+        }else if(ch == 'f'){
+            int meow;
+            int p;
+            timeout(-1);
+            p = getch();
+            if(p == 'j' || p == KEY_UP){//U
+                meow = 0;
+            }else if(p == 'k' || p == KEY_DOWN){//D
+                meow = 1;
+            }else if(p == 'l' || p == KEY_LEFT){//L
+                meow = 3;
+            }else if(p == 'h' || p == KEY_RIGHT){//R
+                meow = 2;
+            }else if(p == 'y'){//UL
+                meow = 5;
+            }else if(p == 'u'){//UR
+                meow = 4;
+            }else if(p == 'n'){//DR
+                meow = 6;
+            }else if(p == 'b'){//DL
+                meow = 7;
+            }
+            sari(pl , meow , floor);
         }else if(ch == -1){
             //time ham ro check konam;
             time(&now);
@@ -4301,6 +4405,29 @@ int play_tabaghe2(int otagh , int list[otagh][5] , char floor[LINES][COLS] , int
             }else if(pl->Dast == -1){//No Weapon
                 
             }
+        }else if(ch == 'f'){
+            int meow;
+            int p;
+            timeout(-1);
+            p = getch();
+            if(p == 'j' || p == KEY_UP){//U
+                meow = 0;
+            }else if(p == 'k' || p == KEY_DOWN){//D
+                meow = 1;
+            }else if(p == 'l' || p == KEY_LEFT){//L
+                meow = 3;
+            }else if(p == 'h' || p == KEY_RIGHT){//R
+                meow = 2;
+            }else if(p == 'y'){//UL
+                meow = 5;
+            }else if(p == 'u'){//UR
+                meow = 4;
+            }else if(p == 'n'){//DR
+                meow = 6;
+            }else if(p == 'b'){//DL
+                meow = 7;
+            }
+            sari(pl , meow , floor);
         }else if(ch == -1){
             //time ham ro check konam;
             time(&now);
@@ -4529,6 +4656,29 @@ int play_tabaghe3(int otagh , int list[otagh][5] , char floor[LINES][COLS] , int
             }else if(pl->Dast == -1){//No Weapon
                 
             }
+        }else if(ch == 'f'){
+            int meow;
+            int p;
+            timeout(-1);
+            p = getch();
+            if(p == 'j' || p == KEY_UP){//U
+                meow = 0;
+            }else if(p == 'k' || p == KEY_DOWN){//D
+                meow = 1;
+            }else if(p == 'l' || p == KEY_LEFT){//L
+                meow = 3;
+            }else if(p == 'h' || p == KEY_RIGHT){//R
+                meow = 2;
+            }else if(p == 'y'){//UL
+                meow = 5;
+            }else if(p == 'u'){//UR
+                meow = 4;
+            }else if(p == 'n'){//DR
+                meow = 6;
+            }else if(p == 'b'){//DL
+                meow = 7;
+            }
+            sari(pl , meow , floor);
         }else if(ch == -1){
             //time ham ro check konam;
             time(&now);
@@ -4760,6 +4910,29 @@ int play_tabaghe4(int otagh , int list[otagh][5] , char floor[LINES][COLS] , int
             }else if(pl->Dast == -1){//No Weapon
                 
             }
+        }else if(ch == 'f'){
+            int meow;
+            int p;
+            timeout(-1);
+            p = getch();
+            if(p == 'j' || p == KEY_UP){//U
+                meow = 0;
+            }else if(p == 'k' || p == KEY_DOWN){//D
+                meow = 1;
+            }else if(p == 'l' || p == KEY_LEFT){//L
+                meow = 3;
+            }else if(p == 'h' || p == KEY_RIGHT){//R
+                meow = 2;
+            }else if(p == 'y'){//UL
+                meow = 5;
+            }else if(p == 'u'){//UR
+                meow = 4;
+            }else if(p == 'n'){//DR
+                meow = 6;
+            }else if(p == 'b'){//DL
+                meow = 7;
+            }
+            sari(pl , meow , floor);
         }else if(ch == -1){
             //time ham ro check konam;
             time(&now);
@@ -4991,6 +5164,29 @@ int play_tabaghe5(int otagh , int list[otagh][5] , char floor[LINES][COLS] , int
             }else if(pl->Dast == -1){//No Weapon
                 
             }
+        }else if(ch == 'f'){
+            int meow;
+            int p;
+            timeout(-1);
+            p = getch();
+            if(p == 'j' || p == KEY_UP){//U
+                meow = 0;
+            }else if(p == 'k' || p == KEY_DOWN){//D
+                meow = 1;
+            }else if(p == 'l' || p == KEY_LEFT){//L
+                meow = 3;
+            }else if(p == 'h' || p == KEY_RIGHT){//R
+                meow = 2;
+            }else if(p == 'y'){//UL
+                meow = 5;
+            }else if(p == 'u'){//UR
+                meow = 4;
+            }else if(p == 'n'){//DR
+                meow = 6;
+            }else if(p == 'b'){//DL
+                meow = 7;
+            }
+            sari(pl , meow , floor);
         }else if(ch == -1){
             //time ham ro check konam;
             time(&now);
